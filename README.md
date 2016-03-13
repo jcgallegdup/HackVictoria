@@ -13,14 +13,17 @@
 - Some experience in web apps and angular material
 - Second year
 - No co-op terms worked yet
+
 #Spencer Vatrt-Watts' Experience:
 - No prior experience in Javascript and Angular
 - Second year 
 - No co-op terms worked yet.
+
 #Ali Siddiqui's Experience:
 - Minimal prior experience in Javascript with no experience in Angular
 - Second year 
 - No co-op terms worked yet.
+
 #Juan Carlos' Experience:
 - Moderate amount of experience in Javascript with no experience in Angular
 - Member of the WebDev club
