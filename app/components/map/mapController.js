@@ -163,11 +163,12 @@ myApp.controller('mapController', function($scope, $mdDialog, $http, $window, $q
   if (navigator.geolocaion) {
     navigator.geolocation.getCurrentPosition(showPosition);
   } 
+  
   $scope.map = new google.maps.Map(document.getElementById('map'), {
     center: new google.maps.LatLng(48.407326, -123.329773),
     zoom: 13,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
-    disableDefaultUI: true
+    disableDefaultUI: true,
   });
   
   var defaultBounds = new google.maps.LatLngBounds(
