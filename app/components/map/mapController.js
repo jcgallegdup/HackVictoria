@@ -1,4 +1,4 @@
-myApp.controller('mapController', function($scope, $mdDialog, $http, $window, $q, $mdToast, $location) {
+myApp.controller('mapController', function($scope, $mdDialog, $http, $window, $q, $mdToast, $location, sharedService) {
   
     var input = document.getElementById('searchTextField');
 

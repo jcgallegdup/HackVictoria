@@ -1,5 +1,5 @@
 // create the controller and inject Angular's $scope
-myApp.controller('timeAddController', function($scope, $mdDialog, $http, $window, $q, $mdToast) {
+myApp.controller('timeAddController', function($scope, $mdDialog, $http, $window, $q, $mdToast, sharedService) {
     
     $scope.hide = function() {
         $mdDialog.hide();

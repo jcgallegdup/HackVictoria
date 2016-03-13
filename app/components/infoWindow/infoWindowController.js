@@ -1,5 +1,5 @@
 // create the controller and inject Angular's $scope
-myApp.controller('infoWindowController', function($scope, $mdDialog, $http, $window, $q) {
+myApp.controller('infoWindowController', function($scope, $mdDialog, $http, $window, $q, sharedService) {
     
     $scope.hide = function() {
         $mdDialog.hide();
