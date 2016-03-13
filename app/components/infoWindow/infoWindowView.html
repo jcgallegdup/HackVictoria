@@ -2,7 +2,7 @@
   <form>
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h2><i class="material-icons white">location_on</i>{{ data.meter }}</h2>
+        <h2><i class="material-icons white">location_on</i></h2>
       </div>
     </md-toolbar>
     <md-dialog-content style="width:auto; height: auto;" layout-padding>
@@ -14,13 +14,13 @@
             <md-slider-container>
                 <md-slider class="md-primary" flex min="0" max="5" ng-model="time" aria-label="time"></md-slider>
             </md-slider-container>
-            <p>Cost: {{ getCost() }}</p>
+            <span>Cost: ${{ getCost() }}</span>
         </div>
     </md-dialog-content>
     <md-dialog-actions layout="row">
         <span flex></span>
         <md-button ng-click="cancel()">Cancel</md-button>
-        <md-button ng-click="park('confirm')">Park</md-button>
+        <md-button ng-click="cancel()" href="#timeLeft">Park</md-button>
     </md-dialog-actions>
     </form>
 </md-dialog>

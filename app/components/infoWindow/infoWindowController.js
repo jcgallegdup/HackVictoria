@@ -47,7 +47,7 @@ myApp.controller('infoWindowController', function($scope, $mdDialog, $http, $win
     }
     
     $scope.getCost = function() {
-        return timeToNum() * data.rate;
+        return timeToNum() * $scope.data.rate;
     }
     
     $scope.timeToString = function() {
