@@ -1,3 +1,12 @@
 <md-content flex ng-controller="timeLeftController as ctrl" layout="column" ng-cloak>
-  
+	<div layout="column" layout-align="center center" layout-wrap>
+	<p> Time Left: </p>
+ 	<md-progress-circular md-mode="determinate" value="{{ctrl.determinateValue}}" md-diameter="90"></md-progress-circular>
+ 	<p> 30 minutes </p> 
+ 	<!-- Change above value to mirror passed-in parameter  -->
+ 	</div>
+ 	<div layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+      <md-button class="md-raised" href="#timeAdd">Add time</md-button>
+      <md-button class="md-raised md-primary">Find your vehicle</md-button>
+  </div>
 </md-content>
