@@ -60,12 +60,12 @@ function displayMapData(filter){
     var result = [];
     for(var i in parkingSpaces){
         var temp = parkingSpaces[i];
-        var d = new Date();             // d is temporary, pending change for final version
-        if((d.getDay() == 0) || (d.getHours() >= 18)){
+        var d = new Date();             // filter.curtime is temporary, pending change for final version
+        if((d.getDay() == 0) || (filter.curtime >= 18)){
             temp.rate = 0;
         }
-        if(d.getHours() + filter.hrs > 18){
-            filter.hrs = 18 - d.getHours();
+        if(filter.curtime + filter.hrs > 18){
+            filter.hrs = 18 - filter.curtime;
         }
         if(temp.type == filter.type && (temp.rate * filter.hrs) <= filter.price){
             result.push(temp);
