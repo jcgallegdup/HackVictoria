@@ -1,6 +1,7 @@
 myApp.controller('mapController', function($scope, $mdDialog, $http, $window, $q, $mdToast, $location) {
-        $scope.map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
-          zoom: 8
+          zoom: 8,
+          disableDefaultUI: true
         });
 });
