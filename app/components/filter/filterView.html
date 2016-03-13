@@ -1,3 +1,51 @@
 <md-content flex ng-controller="filterController as ctrl" layout="column" ng-cloak>
-  
+    
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Back">
+          <i class="material-icons">arrow_back</i>
+        </md-button>
+        <h2>
+          <span>Filters</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Favorite">
+          <md-icon md-svg-icon="img/icons/favorite.svg" style="color: greenyellow;"></md-icon>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="More">
+          <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
+        </md-button>
+      </div>
+      
+    </md-toolbar>
+    <div layout-padding>
+    <p>Parking Type</p>
+    <div layout="row">
+      <md-input-container style="margin-right: 10px;">
+        <label>Type</label>
+        <md-select ng-model="parkingtype">
+          <md-option ng-repeat="type in types" value="{{type}}">{{type}}</md-option>
+        </md-select>
+      </md-input-container>
+    </div>
+
+    <p>Time</p>
+
+    <md-slider-container>
+      <md-input-container>
+        <input flex type="number" ng-model="color.red" aria-label="red" aria-controls="red-slider" class="md-primary">
+      </md-input-container>
+      <md-slider flex min="0" max="255" ng-model="color.red" aria-label="red" id="red-slider" class="md-primary">
+      </md-slider>
+    </md-slider-container>
+    
+    <div layout="row">
+    <i class="material-icons">attach_money</i>
+    <md-input-container class="md-icon-float md-icon-left md-block">
+      <label>Maximum Cost</label>  
+      <input ng-model="user.donation" type="number" step="0.25">
+    </md-input-container>
+    </div>
+    
+    </div>
 </md-content>
