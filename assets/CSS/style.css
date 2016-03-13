@@ -17,6 +17,12 @@
   z-index: 99;
 }
 
+.move-abit {
+  position: relative;
+  top: -240px;
+  z-index: 99;
+}
+
 .wrapper {
     height: 100%;
     display: block;
