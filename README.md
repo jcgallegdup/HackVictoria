@@ -8,18 +8,18 @@
 2. Google Maps API to display the maps and Google autocompletion for the search bar
 3. Angular Material for designing the app
 
-#Matthew Paletta's Experience:
+#Matthew's Experience:
 - Self-employed and self-taught 
 - Some experience in web apps and angular material
 - Second year
 - No co-op terms worked yet
 
-#Spencer Vatrt-Watts' Experience:
+#Spencer's Experience:
 - No prior experience in Javascript and Angular
 - Second year 
 - No co-op terms worked yet.
 
-#Ali Siddiqui's Experience:
+#Ali's Experience:
 - Minimal prior experience in Javascript with no experience in Angular
 - Second year 
 - No co-op terms worked yet.
