@@ -32,12 +32,12 @@
         </h6>
         <md-content class="waymorecloserup">
         <md-content class style="margin:0px; padding:20px">
-          <md-slider-container>
             <md-input-container>
               <input min="0" flex type="number" ng-model="data.time" aria-label="red" aria-controls="red-slider" class="md-primary">
             </md-input-container>
-              
-          </md-slider-container>
+            <md-slider-container>
+                <md-slider class="md-primary" flex min="0" max="5" ng-model="data.time" aria-label="time"></md-slider>
+            </md-slider-container>
         </md-content>
           </md-content>
       </md-content>

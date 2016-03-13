@@ -12,7 +12,7 @@
             <p>Max: {{ data.maxTime }}</p>
             <p>Hours: {{ timeToString() }}</p>
             <md-slider-container>
-                <md-slider flex min="0" max="5" ng-model="time" aria-label="time"></md-slider>
+                <md-slider class="md-primary" flex min="0" max="5" ng-model="time" aria-label="time"></md-slider>
             </md-slider-container>
             <p>Cost: {{ getCost() }}</p>
         </div>
