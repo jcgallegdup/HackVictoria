@@ -1,5 +1,14 @@
 myApp.controller('mapController', function($scope, $mdDialog, $http, $window, $q, $mdToast, $location) {
   
+    var input = document.getElementById('searchTextField');
+
+  var searchBox = new google.maps.places.SearchBox(input);
+  
+  var service = new google.maps.places.AutocompleteService();
+  var infowindow = new google.maps.InfoWindow();
+    
+    
+    
     $scope.searchText = "";
     var predictions = [{description: "item1"},{description: "item2"},{description: "item3"},{description: "item4"}];
     var self = this;
@@ -10,10 +19,37 @@ myApp.controller('mapController', function($scope, $mdDialog, $http, $window, $q
     self.searchTextChange   = searchTextChange;
     
     function searchTextChange(text) {
-        console.log('Text changed to ' + text);
+        //console.log('Text changed to ' + text);
     }
     function selectedItemChange(item) {
-        console.log('Item changed to ' + JSON.stringify(item));
+        console.log(item);
+        
+        var infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService($scope.map);
+
+          service.getDetails({
+            placeId: item.place_id
+          }, function(place, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+              var marker = new google.maps.Marker({
+                map: $scope.map,
+                position: place.geometry.location
+              });
+                
+              google.maps.event.addListener(marker, 'click', function() {
+                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+                  'Place ID: ' + place.place_id + '<br>' +
+                  place.formatted_address + '</div>');
+                infowindow.open($scope.map, this);
+              });
+                
+                console.log(place.geometry.location.lat());
+                gMap.setZoom(8);
+                $scope.map.setCenter(new google.maps.LatLng(place.geometry.location.lat(),place.geometry.location.lng()));
+            }
+          });
+        
+        
     }
   
     function querySearch(query) {
@@ -48,12 +84,7 @@ myApp.controller('mapController', function($scope, $mdDialog, $http, $window, $q
     new google.maps.LatLng(-33.8474, 151.2631)
   );
 
-  var input = document.getElementById('searchTextField');
-
-  var searchBox = new google.maps.places.SearchBox(input, {
-    bounds: defaultBounds
-  });
   
-  var service = new google.maps.places.AutocompleteService();
-  
+    
+    
 });
