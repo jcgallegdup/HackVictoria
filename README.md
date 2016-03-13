@@ -9,20 +9,20 @@
 3. Angular Material for designing the app
 
 #Matthew Paletta's Experience:
-1. Self-employed and self-taught 
-2. Some experience in web apps and angular material
-3. Second year
-4. No co-op terms worked yet
+- Self-employed and self-taught 
+- Some experience in web apps and angular material
+- Second year
+- No co-op terms worked yet
 #Spencer Vatrt-Watts' Experience:
-1. No prior experience in Javascript and Angular
-2. Second year 
-3. No co-op terms worked yet.
+- No prior experience in Javascript and Angular
+- Second year 
+- No co-op terms worked yet.
 #Ali Siddiqui's Experience:
-1. Minimal prior experience in Javascript with no experience in Angular
-2. Second year 
-3. No co-op terms worked yet.
+- Minimal prior experience in Javascript with no experience in Angular
+- Second year 
+- No co-op terms worked yet.
 #Juan Carlos' Experience:
-1. Moderate amount of experience in Javascript with no experience in Angular
-2. Member of the WebDev club
-3. Second year 
-4. No co-op terms worked yet.
+- Moderate amount of experience in Javascript with no experience in Angular
+- Member of the WebDev club
+- Second year 
+- No co-op terms worked yet.
