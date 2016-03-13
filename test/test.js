@@ -60,7 +60,7 @@ function displayMapData(filter){
     var result = [];
     for(var i in parkingSpaces){
         var temp = parkingSpaces[i];
-        var d = new Date();
+        var d = new Date();             // d is temporary, pending change for final version
         if((d.getDay() == 0) || (d.getHours() >= 18)){
             temp.rate = 0;
         }
