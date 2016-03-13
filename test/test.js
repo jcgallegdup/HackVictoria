@@ -25,9 +25,9 @@ function useData(results){
 
     for(var i = 1; i < data.length; i++){
         if(data[i][1] == "HANDICAP"){
-            parkingSpaces.append(new PSpot("handicap", data[i][LAT], data[i][LONG], data[i][METER], data[i][RATE_PER_HR], data[i][MAX_TIME]));
+            parkingSpaces.push(new PSpot("handicap", data[i][LAT], data[i][LONG], data[i][METER], data[i][RATE_PER_HR], data[i][MAX_TIME]));
         }else if(data[i][1].length == 0){
-            parkingSpaces.append(new PSpot("regular", data[i][LAT], data[i][LONG], data[i][METER], data[i][RATE_PER_HR], data[i][MAX_TIME]));
+            parkingSpaces.push(new PSpot("regular", data[i][LAT], data[i][LONG], data[i][METER], data[i][RATE_PER_HR], data[i][MAX_TIME]));
         }
     }
 }
