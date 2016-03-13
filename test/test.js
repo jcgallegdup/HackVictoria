@@ -1,4 +1,8 @@
-var info;
+const LAT = 11;
+const LONG = 10;
+const MAX_TIME = 9;
+const RATE_PER_HR = 8;
+const METER = 7;
 
 $(document).ready(function() {
     $.ajax({
@@ -8,12 +12,33 @@ $(document).ready(function() {
         success: function(data) {Papa.parse(data, {
 	    complete: function(results) {
 	        alert("Finished:", results.data);
-	        info = results.data;
+	        useData(results);
 		    }
 		});
     }
     });
 });
 
-console.log(info);
+function useData(results){
+    var data = results.data;
+    var parkingSpaces = [];
 
+    for(var i = 1; i < data.length; i++){
+        if(data[i][1] == "HANDICAP"){
+            parkingSpaces.append(new PSpot("handicap", data[i][LAT], data[i][LONG], data[i][METER], data[i][RATE_PER_HR], data[i][MAX_TIME]));
+        }else if(data[i][1].length == 0){
+            parkingSpaces.append(new PSpot("regular", data[i][LAT], data[i][LONG], data[i][METER], data[i][RATE_PER_HR], data[i][MAX_TIME]));
+        }
+    }
+}
+
+const PSpot = function(type, latitutde, longitude, meter, rate, maxTime){
+    return {
+        type : type,
+        latitude : latitutde,
+        longitude : longitude,
+        meter : meter,
+        rate : rate, 
+        maxTime : maxTime,
+    }
+}
