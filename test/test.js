@@ -60,6 +60,13 @@ function displayMapData(filter){
     var result = [];
     for(var i in parkingSpaces){
         var temp = parkingSpaces[i];
+        var d = new Date();
+        if((d.getDay() == 0) || (d.getHours() >= 18)){
+            temp.rate = 0;
+        }
+        if(d.getHours() + filter.hrs > 18){
+            filter.hrs = 18 - d.getHours();
+        }
         if(temp.type == filter.type && (temp.rate * filter.hrs) <= filter.price){
             result.push(temp);
         }
