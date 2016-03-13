@@ -1,6 +1,6 @@
 <md-content flex ng-controller="mapController as ctrl" layout="column" ng-cloak style="height:100%;">
     
-    
+    <md-content class="md-padding fixedElement">
   <md-autocomplete
       id="searchTextField"
       md-selected-item="ctrl.selectedItem"
@@ -10,7 +10,7 @@
       md-items="item in ctrl.querySearch(searchText)"
       md-item-text="item.description"
       md-min-length="0"
-      placeholder="Search">
+      placeholder="Search Google Maps">
     <md-item-template>
         <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.description}}</span>
     </md-item-template>
@@ -18,9 +18,7 @@
       No results matching "{{searchText}}" were found.
     </md-not-found>
   </md-autocomplete>
-  
-  
-  
+  </md-content>
     
     <div id="map" layout-fill style="height:600px;"></div>
   
