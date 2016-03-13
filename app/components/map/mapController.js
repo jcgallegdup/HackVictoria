@@ -1,4 +1,25 @@
 myApp.controller('mapController', function($scope, $mdDialog, $http, $window, $q, $mdToast, $location) {
+  
+  $scope.searchText = "";
+  $scope.predictions = [];
+  
+  function selectedItemChange() {
+    
+  }
+  
+  function querySearch(searchText) {
+    service.getQueryPredictions({ input: searchText }, displaySuggestions);
+  }
+  
+  function displaySuggestions(predictions, status){
+    if (status != google.maps.places.PlacesServiceStatus.OK) {
+      alert(status);
+      return;
+    } else {
+      $scope.predictions = predictions;
+    }
+  }
+  
   if (navigator.geolocaion) {
     navigator.geolocation.getCurrentPosition(showPosition);
   } 
@@ -18,5 +39,8 @@ myApp.controller('mapController', function($scope, $mdDialog, $http, $window, $q
 
   var searchBox = new google.maps.places.SearchBox(input, {
     bounds: defaultBounds
-});
+  });
+  
+  var service = new google.maps.places.AutocompleteService();
+  
 });
