@@ -1,3 +1,5 @@
+var info;
+
 $(document).ready(function() {
     $.ajax({
         type: "GET",
@@ -6,12 +8,12 @@ $(document).ready(function() {
         success: function(data) {Papa.parse(data, {
 	    complete: function(results) {
 	        alert("Finished:", results.data);
-	        console.log(results);
+	        info = results.data;
 		    }
 		});
     }
     });
 });
 
-
+console.log(info);
 
