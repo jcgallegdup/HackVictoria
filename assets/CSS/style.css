@@ -1,0 +1,8 @@
+.centerIcon {
+  top: 6px;
+  position: relative;
+}
+
+.material-icons.md-24{ font-size: 24px; }
+
+.white{ fill: white; }

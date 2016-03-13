@@ -37,9 +37,10 @@
   
   <!-- LIBS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTUJS4ZDzQs6_Jq3zplk7hriJH0Y4OemQ&callback=angular.noop"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTUJS4ZDzQs6_Jq3zplk7hriJH0Y4OemQ&callback=angular.noop&libraries=places"></script>
   
-
+  <!-- STYLESHEETS -->
+  <link href="assets/CSS/style.css" rel="stylesheet">
   
 </head>
 
