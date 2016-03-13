@@ -19,17 +19,33 @@ $(document).ready(function() {
     });
 });
 
+var parkingSpaces = [];
+
 function useData(results){
     var data = results.data;
-    var parkingSpaces = [];
-
+    
     for(var i = 1; i < data.length; i++){
         if(data[i][1] == "HANDICAP"){
             parkingSpaces.push(new PSpot("handicap", data[i][LAT], data[i][LONG], data[i][METER], data[i][RATE_PER_HR], data[i][MAX_TIME]));
         }else if(data[i][1] == undefined){
             parkingSpaces.push(new PSpot("regular", data[i][LAT], data[i][LONG], data[i][METER], data[i][RATE_PER_HR], data[i][MAX_TIME]));
+        }else if(data[i][1] == "SMALL VEHICLE"){
+            parkingSpaces.push(new PSpot("small vehicle", data[i][LAT], data[i][LONG], data[i][METER], data[i][RATE_PER_HR], data[i][MAX_TIME]));
         }
     }
+}
+
+// filter is a JSON object with attributes:
+// type, hrs (that the user will park), & price (max the user wants to spend)
+function displayMapData(filter){
+    var result = [];
+    for(var i in parkingSpaces){
+        var temp = parkingSpaces[i];
+        if(temp.type == filter.type && (temp.rate * filter.hrs) <= filter.price){
+            result.push(temp);
+        }
+    }
+    return result;
 }
 
 const PSpot = function(type, latitutde, longitude, meter, rate, maxTime){
@@ -40,5 +56,5 @@ const PSpot = function(type, latitutde, longitude, meter, rate, maxTime){
         meter : meter,
         rate : rate, 
         maxTime : maxTime,
-    }
+    };
 }
