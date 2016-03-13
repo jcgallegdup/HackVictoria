@@ -4,9 +4,9 @@
 ##"This is amazing man... That we're making this app, life itself..." - Ali Siddiqui (again)
 
 #Tools used: 
-1. PapaParse on Javascript for parsing the data set
-2. Google Maps API to display the maps and Google autocompletion for the search bar
-3. Angular Material for designing the app
+- PapaParse on Javascript for parsing the data set
+- Google Maps API to display the maps and Google autocompletion for the search bar
+- Angular Material for designing the app
 
 #Matthew's Experience:
 - Self-employed and self-taught 
