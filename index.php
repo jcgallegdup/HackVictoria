@@ -36,14 +36,18 @@
   
   <!-- LIBS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTUJS4ZDzQs6_Jq3zplk7hriJH0Y4OemQ&callback=angular.noop"></script>
+  
 </head>
 
 <body>
 
-  <div id="main">
-    <div ng-view>
-    
-    </div>
+  <div id="main" layout-fill layout="column">
+    <md-content md-scroll-y flex>
+      <div ng-view>
+
+      </div>
+    </md-content> 
   </div>
 
 </body>
