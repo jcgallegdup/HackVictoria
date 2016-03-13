@@ -44,7 +44,7 @@ myApp.controller('mapController', function($scope, $mdDialog, $http, $window, $q
               });
                 
                 console.log(place.geometry.location.lat());
-                $scope.map.setZoom(8);
+                $scope.map.setZoom(16);
                 $scope.map.setCenter(new google.maps.LatLng(place.geometry.location.lat(),place.geometry.location.lng()));
             }
           });

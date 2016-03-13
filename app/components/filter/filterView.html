@@ -2,7 +2,7 @@
     
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <md-button class="md-icon-button" aria-label="Back">
+        <md-button class="md-icon-button white" aria-label="Back">
           <i class="material-icons">arrow_back</i>
         </md-button>
         <h2>
@@ -30,14 +30,15 @@
     </div>
 
     <p>Time</p>
-
+      <md-content style="margin: 30px; padding:2px">
     <md-slider-container>
       <md-input-container>
         <input flex type="number" ng-model="color.red" aria-label="red" aria-controls="red-slider" class="md-primary">
       </md-input-container>
-      <md-slider flex min="0" max="255" ng-model="color.red" aria-label="red" id="red-slider" class="md-primary">
+      <md-slider flex min="0" max="20" ng-model="color.red" aria-label="red" id="red-slider" class="md-primary">
       </md-slider>
     </md-slider-container>
+      </md-content>
     
     <div layout="row">
     <i class="material-icons">attach_money</i>
