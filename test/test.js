@@ -20,19 +20,38 @@ $(document).ready(function() {
 });
 
 var parkingSpaces = [];
+var maxLongitude, maxLatitude, minLongitude, minLatitude;
 
 function useData(results){
     var data = results.data;
     
     for(var i = 1; i < data.length; i++){
         if(data[i][1] == "HANDICAP"){
-            parkingSpaces.push(new PSpot("handicap", data[i][LAT], data[i][LONG], data[i][METER], data[i][RATE_PER_HR], data[i][MAX_TIME]));
+            type = "handicap";
         }else if(data[i][1] == undefined){
-            parkingSpaces.push(new PSpot("regular", data[i][LAT], data[i][LONG], data[i][METER], data[i][RATE_PER_HR], data[i][MAX_TIME]));
+            type = "regular";
         }else if(data[i][1] == "SMALL VEHICLE"){
-            parkingSpaces.push(new PSpot("small vehicle", data[i][LAT], data[i][LONG], data[i][METER], data[i][RATE_PER_HR], data[i][MAX_TIME]));
+            type = "small vehicle";
+        }else{
+            continue;
+        }
+        parkingSpaces.push(new PSpot(type, data[i][LAT], data[i][LONG], data[i][METER], data[i][RATE_PER_HR], data[i][MAX_TIME]));
+        if(maxLatitude < data[i][LAT]){
+            maxLatitude = data[i][LAT];
+        } else if(minLatitude > data[i][LAT]){
+            minLatitude = data[i][LAT];
+        }
+        if(maxLongitude < data[i][LONG]){
+            maxLongitude = data[i][LONG];
+        } else if(maxLongitude > data[i][LONG]){
+            minLongitude = data[i][LONG];
         }
     }
+
+}
+
+function getBounds(){
+    return [maxLongitude, maxLatitude, minLongitude, minLatitude];
 }
 
 // filter is a JSON object with attributes:
