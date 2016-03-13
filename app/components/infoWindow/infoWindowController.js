@@ -68,8 +68,8 @@ myApp.controller('infoWindowController', function($scope, $mdDialog, $http, $win
         }
     }
     
-    
-    var data = sharedService.getParkingSpots()[sharedService.getId()];
+    console.log(sharedService.getId());
+    $scope.data = sharedService.getParkingSpots()[sharedService.getId()];
     
     
 });

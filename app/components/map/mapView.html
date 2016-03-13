@@ -1,6 +1,4 @@
 <md-content flex ng-controller="mapController as ctrl" layout="column" ng-cloak style="height:100%;">
-
-
   <div id="map" style="height:100vh;"></div>
   
   <div layout-align="center start" layout="row"> 
@@ -27,9 +25,9 @@
     
   <div style="position:fixed; bottom:7px; right:7px;">
    <md-fab-speed-dial md-open="demo.isOpen" md-direction="up"
-                         ng-class="demo.selectedMode" href="#filter">
+                         ng-class="demo.selectedMode">
       <md-fab-trigger>
-        <md-button aria-label="menu" class="md-fab md-primary">
+        <md-button aria-label="menu" class="md-fab md-primary" ng-click="centerView()">
           <i class="material-icons centerIcon md-30 white">gps_fixed</i>
         </md-button>
       </md-fab-trigger>

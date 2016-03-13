@@ -9,7 +9,7 @@
         <div class="md-dialog-content">
             <h2>{{data.meter}}</h2>
             <p>Type: {{ data.type }}</p>
-            <p>Max: {{ data.maxTime }} hours</p>
+            <p>Max: {{ data.maxTime }}</p>
             <p>Hours: {{ timeToString() }}</p>
             <md-slider-container>
                 <md-slider flex min="0" max="5" ng-model="time" aria-label="time"></md-slider>

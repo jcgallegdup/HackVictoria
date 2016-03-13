@@ -1,4 +1,4 @@
-myApp.controller('mapController', function($scope, $mdDialog, $http, $window, $q, $mdToast, $location, sharedService) {
+myApp.controller('mapController', function($scope, $mdDialog, $http, $window, $q, $mdToast, $location, sharedService, $interval) {
   
   const LAT = 11;
   const LONG = 10;
@@ -13,8 +13,11 @@ myApp.controller('mapController', function($scope, $mdDialog, $http, $window, $q
           dataType: "text",
           success: function(data) {Papa.parse(data, {
           complete: function(results) {
-              alert("Finished:", results.data);
+              //alert("Finished:", results.data);
               useData(results);
+              locations = displayMapData();
+              sharedService.setParkingSpots(parkingSpaces);
+              addMarkers();
               }
           });
       }
@@ -23,18 +26,21 @@ myApp.controller('mapController', function($scope, $mdDialog, $http, $window, $q
   
   var parkingSpaces = [];
   var maxLongitude, maxLatitude, minLongitude, minLatitude;
-
-  function useData(results){
+  
+  // locations that match the criteria
+  var locations = [];
+    
+  function useData(results) {
       var data = results.data;
 
       for(var i = 1; i < data.length; i++){
-          if(data[i][1] == "HANDICAP"){
+          if(data[i][1] == "HANDICAP") {
               type = "handicap";
-          }else if(data[i][1] == undefined){
-              type = "regular";
-          }else if(data[i][1] == "SMALL VEHICLE"){
+          } else if(data[i][1] == undefined || data[i][1] == " ") {
+              type = "standard";
+          } else if(data[i][1] == "SMALL VEHICLE") {
               type = "small vehicle";
-          }else{
+          } else {
               continue;
           }
           parkingSpaces.push(new PSpot(type, data[i][LAT], data[i][LONG], data[i][METER], data[i][RATE_PER_HR], data[i][MAX_TIME]));
@@ -49,7 +55,6 @@ myApp.controller('mapController', function($scope, $mdDialog, $http, $window, $q
               minLongitude = data[i][LONG];
           }
       }
-
   }
 
   function getBounds(){
@@ -58,21 +63,30 @@ myApp.controller('mapController', function($scope, $mdDialog, $http, $window, $q
 
   // filter is a JSON object with attributes:
   // type, hrs (that the user will park), & price (max the user wants to spend)
-  function displayMapData(filter){
+  function displayMapData() {
+      var filter = {type: sharedService.getType(), hrs: sharedService.getTime(), price: sharedService.getCost()};
+       
       var result = [];
-      for(var i in parkingSpaces){
+      for (var i = 0; i < parkingSpaces.length; i++){
           var temp = parkingSpaces[i];
+
           var d = new Date();             // d is temporary, pending change for final version
-          if((d.getDay() == 0) || (d.getHours() >= 18)){
+          
+          /*if((d.getDay() == 0) || (d.getHours() >= 18)){
               temp.rate = 0;
           }
           if(d.getHours() + filter.hrs > 18){
               filter.hrs = 18 - d.getHours();
-          }
-          if(temp.type == filter.type && (temp.rate * filter.hrs) <= filter.price){
+          }*/
+          
+          var str1 = temp.type;
+          var str2 = filter.type.toLowerCase();
+          
+          if(angular.equals(str1,str2) && (parseFloat(temp.rate) * filter.hrs) <= filter.price){
               result.push(temp);
           }
       }
+      console.log(result);
       return result;
   }
 
@@ -129,19 +143,38 @@ myApp.controller('mapController', function($scope, $mdDialog, $http, $window, $q
 
             google.maps.event.addListener(marker, 'click', function() {
               infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-                'Place ID: ' + place.place_id + '<br>' +
                 place.formatted_address + '</div>');
               infowindow.open($scope.map, this);
             });
 
-              console.log(place.geometry.location.lat());
+              //console.log(place.geometry.location.lat());
               $scope.map.setZoom(16);
               $scope.map.setCenter(new google.maps.LatLng(place.geometry.location.lat(),place.geometry.location.lng()));
           }
         });
-
-
-  }
+    }
+    
+    $scope.centerView = function() {
+        
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            alert("Unable to use location info");
+            $scope.map.setZoom(16);
+            $scope.map.setCenter(new google.maps.LatLng(48.407326, -123.329773));
+        }
+        
+        
+    }
+    
+    function showPosition(position) {
+        var d = {lat: position.coords.latitude, lng: position.coords.longitude}; 
+        
+        $scope.map.setZoom(16);
+        $scope.map.setCenter(new google.maps.LatLng(d.lat,d.lng));
+        
+        return d;
+    }
 
   function querySearch(query) {
       //console.log("querying!");
@@ -160,10 +193,6 @@ myApp.controller('mapController', function($scope, $mdDialog, $http, $window, $q
       //return predictions;
   }
   
-  if (navigator.geolocaion) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } 
-  
   $scope.map = new google.maps.Map(document.getElementById('map'), {
     center: new google.maps.LatLng(48.407326, -123.329773),
     zoom: 13,
@@ -171,13 +200,63 @@ myApp.controller('mapController', function($scope, $mdDialog, $http, $window, $q
     disableDefaultUI: true,
   });
   
+    var bounds = getBounds();
+    
   var defaultBounds = new google.maps.LatLngBounds(
-    new google.maps.LatLng(-33.8902, 151.1759),
-    new google.maps.LatLng(-33.8474, 151.2631)
+    new google.maps.LatLng(bounds[1], bounds[2]),
+    new google.maps.LatLng(bounds[3], bounds[0])
   );
-  
-  
-  var locations = displayMapData()
+    
+    var markers = [];
+    function addMarkers() {        
+        for (var i = 0; i < locations.length; i++) {
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locations[i].latitude, locations[i].longitude),
+                map: $scope.map
+            });
+            
+            marker.addListener('click', function(ev) {
+                for (var i = 0; i < markers.length; i++) {
+                    if (marker.getPosition().lat() == markers[i].internalPosition.lat() && marker.getPosition().lng() == markers[i].internalPosition.lng()) {
+                        sharedService.setId(i);
+                        console.log(i);
+                        break;
+                    }
+                }
+                $mdDialog.show({
+                    controller: 'infoWindowController',
+                    templateUrl: 'app/components/infoWindow/infoWindowView.html',
+                    parent: angular.element(document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose:true
+                })
+                .then(function(answer) {
+                    $scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    $scope.status = 'You cancelled the dialog.';
+                });
+            });
+            
+            markers.push(marker);
+        }
+    }
+    
+    function removeMarkers() {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(null);
+        }
+    }
+    
+    var data = {type: sharedService.getType(), hrs: sharedService.getTime(), price: sharedService.getCost()};
+    function updateMarkers() {
+        if (sharedService.getType() != data.type || sharedService.getTime() != data.hrs || sharedService.getCost() != data.price) {
+            locations = displayMapData();
+            removeMarkers();
+            markers = [];
+            addMarkers();
+        }
+    }
     
     
+    var updateFilters = $interval(updateMarkers, 1000);
 });
