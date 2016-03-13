@@ -1,24 +1,37 @@
 myApp.controller('mapController', function($scope, $mdDialog, $http, $window, $q, $mdToast, $location) {
   
-  $scope.searchText = "";
-  $scope.predictions = [];
-  
-  function selectedItemChange() {
+    $scope.searchText = "";
+    var predictions = [{description: "item1"},{description: "item2"},{description: "item3"},{description: "item4"}];
+    var self = this;
+    // list of `state` value/display objects
+    self.predictions = predictions;
+    self.querySearch   = querySearch;
+    self.selectedItemChange = selectedItemChange;
+    self.searchTextChange   = searchTextChange;
     
-  }
-  
-  function querySearch(searchText) {
-    service.getQueryPredictions({ input: searchText }, displaySuggestions);
-  }
-  
-  function displaySuggestions(predictions, status){
-    if (status != google.maps.places.PlacesServiceStatus.OK) {
-      alert(status);
-      return;
-    } else {
-      $scope.predictions = predictions;
+    function searchTextChange(text) {
+        console.log('Text changed to ' + text);
     }
-  }
+    function selectedItemChange(item) {
+        console.log('Item changed to ' + JSON.stringify(item));
+    }
+  
+    function querySearch(query) {
+        //console.log("querying!");
+        service.getQueryPredictions({ input: query }, displaySuggestions);
+        return predictions;
+    }
+  
+    function displaySuggestions(PRE, status){
+      
+        if (status != google.maps.places.PlacesServiceStatus.OK) {
+            alert(status);
+            return;
+        } else {
+            predictions = PRE;
+        }
+        //return predictions;
+    }
   
   if (navigator.geolocaion) {
     navigator.geolocation.getCurrentPosition(showPosition);

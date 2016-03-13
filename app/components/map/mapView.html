@@ -1,28 +1,31 @@
 <md-content flex ng-controller="mapController as ctrl" layout="column" ng-cloak style="height:100%;">
+    
+    
   <md-autocomplete
       id="searchTextField"
-      ng-disabled="ctrl.isDisabled"
-      md-no-cache="ctrl.noCache"
       md-selected-item="ctrl.selectedItem"
       md-search-text-change="ctrl.searchTextChange(searchText)"
-      md-search-text="ctrl.searchText"
+      md-search-text="searchText"
       md-selected-item-change="ctrl.selectedItemChange(item)"
       md-items="item in ctrl.querySearch(searchText)"
       md-item-text="item.description"
       md-min-length="0"
       placeholder="Search">
     <md-item-template>
-      <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+        <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.description}}</span>
     </md-item-template>
     <md-not-found>
-      No results matching "{{ctrl.searchText}}" were found.
-      <a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a>
+      No results matching "{{searchText}}" were found.
     </md-not-found>
   </md-autocomplete>
-  <div id="map" layout-fill style="height:600px;"></div>
-  <div style="position:fixed; bottom:25px; right:25px;">
+  
+    
+    <div id="map" layout-fill style="height:600px;"></div>
+  
+    
+    <div style="position:fixed; bottom:25px; right:25px;">
      <md-fab-speed-dial md-open="demo.isOpen" md-direction="up"
-                         ng-class="demo.selectedMode" ng-click="#filter">
+                         ng-class="demo.selectedMode" href="#filter">
       <md-fab-trigger>
         <md-button aria-label="menu" class="md-fab md-primary">
           <i class="material-icons centerIcon md-30 white">gps_fixed</i>
@@ -30,7 +33,7 @@
       </md-fab-trigger>
     </md-fab-speed-dial>
     <md-fab-speed-dial md-open="demo.isOpen" md-direction="up"
-                         ng-class="demo.selectedMode" ng-click="#filter">
+                         ng-class="demo.selectedMode" href="#filter">
       <md-fab-trigger>
         <md-button aria-label="menu" class="md-fab md-primary">
           <i class="material-icons centerIcon md-30 white">filter_list</i>
