@@ -4,4 +4,9 @@ myApp.controller('filterController', function($scope, $mdDialog, $http, $window,
     "Handicap",
     "Small Car"
   ];
+  
+  $scope.changeView = function(person){
+      var mapViewPath = '/map';
+      $location.path(mapViewPath);
+  }
 });
