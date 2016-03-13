@@ -2,18 +2,25 @@
   <form>
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h2><i class="material-icons white">event_available</i> RSVP: {{ name }}</h2>
+        <h2><i class="material-icons white">location_on</i>{{ data.meter }}</h2>
       </div>
     </md-toolbar>
     <md-dialog-content style="width:auto; height: auto;" layout-padding>
         <div class="md-dialog-content">
-        
+            <h2>{{data.meter}}</h2>
+            <p>Type: {{ data.type }}</p>
+            <p>Max: {{ data.maxTime }} hours</p>
+            <p>Hours: {{ timeToString() }}</p>
+            <md-slider-container>
+                <md-slider flex min="0" max="5" ng-model="time" aria-label="time"></md-slider>
+            </md-slider-container>
+            <p>Cost: {{ getCost() }}</p>
         </div>
     </md-dialog-content>
     <md-dialog-actions layout="row">
         <span flex></span>
-        <md-button ng-click="answer()">Cancel</md-button>
-        <md-button ng-click="answer('confirm')">Park</md-button>
+        <md-button ng-click="cancel()">Cancel</md-button>
+        <md-button ng-click="park('confirm')">Park</md-button>
     </md-dialog-actions>
     </form>
 </md-dialog>

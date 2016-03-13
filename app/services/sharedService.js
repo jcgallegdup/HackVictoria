@@ -1,5 +1,4 @@
 myApp.service('sharedService', function() {
-    var myList = [];
     var id = -1;
     
     var type = "";
@@ -65,6 +64,14 @@ myApp.service('sharedService', function() {
         return carLoc;
     }
 
+    var getId = function() {
+	return id;
+    }
+
+    var setId = function(id) {
+    	this.id = id;
+    }
+
     return {
         getType: getType,
         setType: setType,
@@ -86,6 +93,9 @@ myApp.service('sharedService', function() {
         getTimeRemaining: getTimeRemaining,
         
         setCarLoc: setCarLoc,
-        getCarLoc: getCarLoc
+        getCarLoc: getCarLoc,
+
+	setId: setId,
+	getId: getId
     };
 });

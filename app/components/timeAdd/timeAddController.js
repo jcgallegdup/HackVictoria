@@ -10,4 +10,7 @@ myApp.controller('timeAddController', function($scope, $mdDialog, $http, $window
     $scope.answer = function(answer) {
       $mdDialog.hide(answer);
     };
+    
+    
+    
 });
