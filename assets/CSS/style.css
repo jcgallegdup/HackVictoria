@@ -10,3 +10,18 @@
 .material-icons.md-24{ font-size: 24px; }
 
 .white{ color: white; }
+
+.move-up {
+  position: relative;
+  top: -580px;
+  z-index: 99;
+}
+
+.wrapper {
+    height: 100%;
+    display: block;
+    position: relative;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    background: #000;
+}

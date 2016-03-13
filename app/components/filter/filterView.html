@@ -1,35 +1,31 @@
 <md-content flex ng-controller="filterController as ctrl" layout="column" ng-cloak>
-    
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <md-button class="md-icon-button white" aria-label="Back">
-          <i class="material-icons">arrow_back</i>
-        </md-button>
-        <h2>
-          <span>Filters</span>
-        </h2>
-        <span flex></span>
-        <md-button class="md-icon-button" aria-label="Favorite">
-          <md-icon md-svg-icon="img/icons/favorite.svg" style="color: greenyellow;"></md-icon>
-        </md-button>
-        <md-button class="md-icon-button" aria-label="More">
-          <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
-        </md-button>
-      </div>
-      
-    </md-toolbar>
-    <div layout-padding>
-    <p>Parking Type</p>
-    <div layout="row">
-      <md-input-container style="margin-right: 10px;">
-        <label>Type</label>
-        <md-select ng-model="parkingtype">
-          <md-option ng-repeat="type in types" value="{{type}}">{{type}}</md-option>
-        </md-select>
-      </md-input-container>
+
+  <md-toolbar class="md-whiteframe-z2">
+    <div class="md-toolbar-tools" flex="100">
+      <md-button class="md-icon-button white" aria-label="Back">
+        <i class="material-icons white">arrow_back</i>
+      </md-button>
+      <h1 class="md-title white">
+        <span>Filters</span>
+      </h1>
+      <span flex></span>
     </div>
 
-    <p>Time</p>
+  </md-toolbar>
+
+  <div layout-padding layout="column">
+    <div layout="column">
+      <h6 class="md-subhead">Parking Type</h6>
+        <md-input-container style="margin-right: 10px;">
+          <label>Type</label>
+          <md-select ng-model="parkingtype">
+            <md-option ng-repeat="type in types" value="{{type}}">{{type}}</md-option>
+          </md-select>
+        </md-input-container>
+    </div>
+    <md-divider></md-divider>
+    <div layout="column">
+    <h6 class="md-subhead">Time</h6>
       <md-content style="margin: 30px; padding:2px">
     <md-slider-container>
       <md-input-container>
@@ -39,14 +35,21 @@
       </md-slider>
     </md-slider-container>
       </md-content>
-    
-    <div layout="row">
-    <i class="material-icons">attach_money</i>
-    <md-input-container class="md-icon-float md-icon-left md-block">
-      <label>Maximum Cost</label>  
-      <input ng-model="user.donation" type="number" step="0.25">
-    </md-input-container>
+      </div>
+    <md-divider></md-divider>
+
+    <div layout="column">
+      <h6 class="md-subhead">Cost</h6>
+      <div layout="row">
+        <i class="material-icons">attach_money</i>
+        <md-input-container class="md-icon-float md-icon-left md-block">
+          <label>Maximum Cost</label>  
+          <input ng-model="user.donation" type="number" step="0.25">
+        </md-input-container>
+      
+      </div>
+      
     </div>
-    
-    </div>
+  </div>
+
 </md-content>
