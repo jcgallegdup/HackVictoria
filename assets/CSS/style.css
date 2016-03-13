@@ -13,7 +13,7 @@
 
 .move-up {
   position: relative;
-  top: -700px;
+  top: -300px;
   z-index: 99;
 }
 
